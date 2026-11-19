@@ -606,14 +606,14 @@ function stageShot(name) {
   hud.show();
   G.mode = 'playing';
   if (name === 'drive') {
-    const car = addParked('coupe', '#2ec4b6', 26.6, 44, 0);
+    const car = addParked('coupe', '#2ec4b6', 26.6, 20, 0);
     car.driver = 'player';
     G.inCar = car;
     player.mesh.visible = false;
     car.speed = 10;
     G.camYaw = Math.PI;
     // Company on the avenue: one car ahead in our lane, one coming the other way.
-    traffic.addCar(26.6, 58, { x: 30, z: 30 }, { x: 30, z: 90 }, 10.5);
+    traffic.addCar(26.6, 38, { x: 30, z: 30 }, { x: 30, z: 90 }, 10.5);
     traffic.addCar(33.4, 86, { x: 30, z: 90 }, { x: 30, z: 30 }, 11);
     missions.start(); // First Run, silently: the objective is on the HUD
     missions.events.length = 0;
@@ -636,14 +636,15 @@ function stageShot(name) {
     missions.start();
     missions.events.length = 0;
   } else if (name === 'mission') {
-    // Forecourt of Ferreira Motors, under the sign: Rio faces Sol mid-briefing.
-    sol.position.set(-110, 0, 76);
-    sol.rotation.y = 0.52;
-    player.teleport(-108, 79.5, -2.62);
-    player.mesh.rotation.y = -2.62;
-    G.camYaw = 0.47;
-    G.camDist = 7;
-    G.camPitch = 0.16;
+    // Forecourt of Ferreira Motors: Rio's shoulder in the foreground, Sol facing
+    // him, and the avenue with the city beyond — the briefing, framed wide.
+    sol.position.set(-98.5, 0, 66);
+    sol.rotation.y = -1.11;
+    player.teleport(-101.5, 67.5, 2.03);
+    player.mesh.rotation.y = 2.03;
+    G.camYaw = -1.33;
+    G.camDist = 8;
+    G.camPitch = 0.22;
     const intro = missions.start();
     if (intro) showDialogue(intro);
   }
