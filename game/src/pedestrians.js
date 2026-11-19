@@ -6,7 +6,7 @@
 
 import * as THREE from '../vendor/three.module.min.js';
 import { makePersonMesh, animateWalk } from './player.js';
-import { BLOCK_XS, BLOCK_ZS, PARK_Z } from './world.js';
+import { BLOCK_XS, BLOCK_ZS } from './world.js';
 
 const SHIRTS = ['#e67e22', '#ecf0f1', '#9b59b6', '#e74c3c', '#f1c40f', '#1abc9c', '#fd79a8', '#54a0ff', '#ff9f43', '#c8d6e5'];
 const PANTS = ['#2c3e50', '#576574', '#222f3e', '#8395a7', '#5f27cd'];
@@ -16,8 +16,8 @@ export class Pedestrians {
     this.peds = [];
     this.onCrime = null; // (kind, x, z) => {}
     const loops = [];
-    for (const bx of BLOCK_XS) for (const bz of BLOCK_ZS) loops.push({ cx: bx, cz: bz, half: 26.5 });
-    loops.push({ cx: 0, cz: PARK_Z, half: 30 });
+    for (const bx of BLOCK_XS) for (const bz of BLOCK_ZS) loops.push({ cx: bx, cz: bz, half: 22.8 });
+    loops.push({ cx: 0, cz: 118, half: 20 });
     for (let i = 0; i < count; i++) {
       const loop = loops[rng.int(0, loops.length - 1)];
       const mesh = makePersonMesh(rng.pick(SHIRTS), rng.pick(PANTS), rng.int(0, 3));

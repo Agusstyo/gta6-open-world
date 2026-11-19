@@ -81,7 +81,7 @@ export function makeVehicle(kind, color, x, z, heading) {
   mesh.rotation.y = heading;
   return {
     kind, mesh, heading, speed: 0, steer: 0, damage: 0,
-    radius: 1.35, dead: false, driver: null, honkAt: 0,
+    radius: 1.15, dead: false, driver: null, honkAt: 0,
     get x() { return mesh.position.x; }, get z() { return mesh.position.z; },
     forwardX() { return Math.sin(this.heading); }, forwardZ() { return Math.cos(this.heading); },
   };
@@ -125,7 +125,7 @@ export function stepVehicle(v, dt, control, colliders) {
 // Soft circle collision between two vehicles: separate them and trade a little speed.
 export function collideVehicles(a, b) {
   const dx = b.x - a.x, dz = b.z - a.z;
-  const d = Math.hypot(dx, dz), min = a.radius + b.radius + 0.35;
+  const d = Math.hypot(dx, dz), min = a.radius + b.radius + 0.2;
   if (d === 0 || d >= min) return 0;
   const push = (min - d) / 2, ux = dx / d, uz = dz / d;
   a.mesh.position.x -= ux * push; a.mesh.position.z -= uz * push;

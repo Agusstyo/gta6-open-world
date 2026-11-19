@@ -26,6 +26,7 @@ function neighbours(node) {
 export class Traffic {
   constructor(scene, rng, colliders, count = 14) {
     this.cars = [];
+    this.scene = scene;
     this.colliders = colliders;
     this.rng = rng;
     this.onCrash = null; // (impact, x, z) => {}
@@ -48,8 +49,17 @@ export class Traffic {
     }
   }
 
-  release(vehicle) {
-    const i = this.cars.findIndex((c) => c.v === vehicle);
+  // Add one car mid-leg between two junctions (used to stage screenshot scenes).
+  addCar(x, z, from, to, cruise = 11.5) {
+    const kind = KINDS[this.rng.int(0, KINDS.length - 1)];
+    const v = makeVehicle(kind, CAR_COLORS[this.rng.int(0, CAR_COLORS.length - 1)], x, z, Math.atan2(to.x - from.x, to.z - from.z));
+    v.driver = 'traffic';
+    this.scene.add(v.mesh);
+    this.cars.push({ v, from, to, cruise, stuckFor: 0, waitAfterTheft: 0 });
+    return v;
+  }
+
+  release(vehicle) {    const i = this.cars.findIndex((c) => c.v === vehicle);
     if (i >= 0) this.cars.splice(i, 1);
   }
 

@@ -211,7 +211,7 @@ export function buildWorld(scene, rng) {
   // Kerbside parking spots along the vertical avenues, clear of junctions.
   const parkSpots = [];
   for (const x of ROAD_XS.slice(1, 5)) for (const bz of [...BLOCK_ZS, PARK_Z]) {
-    for (const side of [-5.3, 5.3]) for (const off of [-13, 0, 13]) {
+    for (const side of [-5.9, 5.9]) for (const off of [-13, 0, 13]) {
       parkSpots.push({ x: x + side, z: bz + off, heading: side > 0 ? Math.PI : 0 });
     }
   }
