@@ -1,0 +1,117 @@
+/* Port Marisol — screen styling. Warm coastal palette: deep teal night-sea panels,
+   coral and sun-yellow accents, chunky condensed type for the title. */
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { width: 100%; height: 100%; overflow: hidden; background: #0b2027; }
+body { font-family: "Avenir Next", "Segoe UI", system-ui, sans-serif; color: #fdf6ec; }
+#stage, #stage canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.hidden { display: none !important; }
+
+/* ---------- HUD ---------- */
+#hud { position: absolute; inset: 0; pointer-events: none; z-index: 5; }
+#hud-left { position: absolute; top: 16px; left: 16px; width: 196px; }
+#minimap {
+  width: 196px; height: 196px; border-radius: 10px;
+  border: 2px solid rgba(253, 246, 236, 0.55);
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.45);
+  background: #10222b;
+}
+#objective-panel {
+  margin-top: 10px; padding: 9px 11px; border-radius: 8px;
+  background: rgba(8, 26, 33, 0.72); border-left: 4px solid #ffb340;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.6);
+}
+#objective-title { font-size: 13px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: #ffb340; }
+#objective-text { font-size: 13px; line-height: 1.35; margin-top: 2px; }
+#objective-dist { font-size: 12px; font-weight: 700; color: #7fe3d0; margin-top: 3px; }
+#hud-right { position: absolute; top: 16px; right: 18px; text-align: right; text-shadow: 0 2px 6px rgba(0,0,0,0.65); }
+#cash { font-size: 30px; font-weight: 900; letter-spacing: 0.02em; color: #8dff9a; }
+#stars { font-size: 24px; letter-spacing: 3px; color: #ffd23e; min-height: 30px; }
+#stars .off { color: rgba(253, 246, 236, 0.25); }
+#clock { font-size: 14px; font-weight: 700; color: #cfe8e2; }
+#hud-bottom { position: absolute; left: 16px; bottom: 16px; display: flex; align-items: flex-end; gap: 14px; }
+#health-wrap {
+  width: 210px; height: 20px; border-radius: 5px; overflow: hidden; position: relative;
+  background: rgba(8, 26, 33, 0.75); border: 1px solid rgba(253,246,236,0.4);
+}
+#health-bar { height: 100%; width: 100%; background: linear-gradient(90deg, #ff5a49, #ffb340); transition: width 0.18s ease; }
+#health-label {
+  position: absolute; inset: 0; font-size: 11px; font-weight: 800; letter-spacing: 0.22em;
+  display: flex; align-items: center; justify-content: center; color: #fff; text-shadow: 0 1px 2px rgba(0,0,0,0.7);
+}
+#speedo { font-size: 22px; font-weight: 900; color: #fdf6ec; text-shadow: 0 2px 6px rgba(0,0,0,0.7); }
+#interact {
+  position: absolute; left: 50%; bottom: 17%; transform: translateX(-50%);
+  padding: 8px 16px; border-radius: 20px; background: rgba(8, 26, 33, 0.82);
+  font-size: 15px; font-weight: 700; border: 1px solid rgba(255, 179, 64, 0.8);
+}
+#crosshair {
+  position: absolute; left: 50%; top: 50%; width: 6px; height: 6px; margin: -3px;
+  border-radius: 50%; background: rgba(253,246,236,0.9); box-shadow: 0 0 6px rgba(0,0,0,0.8);
+}
+#banner {
+  position: absolute; left: 50%; top: 26%; transform: translateX(-50%); text-align: center;
+  font-size: 40px; font-weight: 900; letter-spacing: 0.06em; color: #ffd23e;
+  text-shadow: 0 3px 0 #c2431f, 0 6px 22px rgba(0,0,0,0.65); white-space: nowrap;
+}
+#banner small { display: block; font-size: 17px; letter-spacing: 0.12em; color: #fdf6ec; text-shadow: 0 2px 8px rgba(0,0,0,0.8); }
+#toast {
+  position: absolute; left: 50%; bottom: 12%; transform: translateX(-50%);
+  padding: 7px 14px; border-radius: 6px; background: rgba(8, 26, 33, 0.8); font-size: 14px; font-weight: 600;
+}
+#dialogue {
+  position: absolute; left: 50%; bottom: 5%; transform: translateX(-50%); width: min(620px, 86vw);
+  padding: 13px 18px 10px; border-radius: 10px; background: rgba(8, 22, 29, 0.88);
+  border: 1px solid rgba(127, 227, 208, 0.5); pointer-events: none;
+}
+#dialogue-name { font-size: 13px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: #7fe3d0; }
+#dialogue-text { font-size: 17px; line-height: 1.45; margin-top: 3px; }
+#dialogue-hint { font-size: 11px; color: rgba(253,246,236,0.55); text-align: right; margin-top: 4px; }
+#damage-vignette {
+  position: absolute; inset: 0; pointer-events: none; opacity: 0;
+  background: radial-gradient(ellipse at center, transparent 55%, rgba(200, 20, 10, 0.55) 100%);
+}
+
+/* ---------- Title & menus ---------- */
+#title-screen {
+  position: absolute; inset: 0; z-index: 10; display: flex; align-items: center; justify-content: center;
+  background: linear-gradient(180deg, rgba(7, 24, 33, 0.12) 40%, rgba(7, 24, 33, 0.55) 100%);
+}
+#title-card { text-align: center; padding: 30px 44px; }
+#title-kicker { font-size: 15px; letter-spacing: 0.55em; text-transform: uppercase; color: #ffe9bd; text-shadow: 0 2px 8px rgba(0,0,0,0.7); }
+#title-logo {
+  font-size: clamp(52px, 9vw, 104px); font-weight: 900; letter-spacing: 0.02em; line-height: 0.95;
+  background: linear-gradient(180deg, #fff3d6 15%, #ffb340 48%, #ff5a49 85%);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+  filter: drop-shadow(0 4px 0 rgba(122, 32, 12, 0.9)) drop-shadow(0 10px 26px rgba(0,0,0,0.55));
+}
+#title-tag { margin-top: 10px; font-size: 17px; font-style: italic; color: #fdf6ec; text-shadow: 0 2px 8px rgba(0,0,0,0.8); }
+#title-buttons { margin-top: 26px; display: flex; gap: 12px; justify-content: center; }
+.title-btn {
+  pointer-events: auto; cursor: pointer; border: 2px solid rgba(253,246,236,0.75); border-radius: 8px;
+  background: rgba(8, 26, 33, 0.78); color: #fdf6ec; font: 700 16px/1 "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  padding: 13px 22px; letter-spacing: 0.04em; transition: transform 0.08s ease, background 0.15s ease;
+}
+.title-btn:hover { transform: translateY(-2px); background: rgba(16, 48, 60, 0.9); }
+.title-btn.primary { background: #ff5a49; border-color: #ffd23e; color: #fff; }
+.title-btn.primary:hover { background: #ff6d5c; }
+#how-panel {
+  margin: 20px auto 0; max-width: 560px; text-align: left; font-size: 14px; line-height: 1.5;
+  background: rgba(8, 26, 33, 0.85); border-radius: 10px; padding: 14px 18px;
+}
+#how-panel p + p { margin-top: 8px; }
+#title-foot { margin-top: 22px; font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(253,246,236,0.75); text-shadow: 0 1px 4px rgba(0,0,0,0.8); }
+#pause-screen {
+  position: absolute; inset: 0; z-index: 9; display: flex; align-items: center; justify-content: center;
+  background: rgba(5, 16, 22, 0.62);
+}
+.menu-card { text-align: center; background: rgba(8, 26, 33, 0.92); border-radius: 14px; padding: 30px 42px; border: 1px solid rgba(127,227,208,0.4); }
+.menu-card h2 { font-size: 32px; letter-spacing: 0.08em; margin-bottom: 8px; }
+.menu-card p { font-size: 14px; color: #cfe8e2; margin-bottom: 18px; line-height: 1.5; }
+.menu-card .title-btn { margin: 0 5px; }
+#wasted-screen {
+  position: absolute; inset: 0; z-index: 11; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; background: rgba(30, 2, 2, 0.55);
+}
+#wasted-word { font-size: clamp(56px, 11vw, 120px); font-weight: 900; letter-spacing: 0.18em; color: #d8d8d8; text-shadow: 0 6px 30px rgba(0,0,0,0.9); }
+#wasted-detail { margin-top: 10px; font-size: 17px; color: #ffb3a7; text-shadow: 0 2px 8px rgba(0,0,0,0.9); }

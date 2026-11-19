@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Port Marisol — an open-world crime game</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="stage"></div>
+
+<!-- In-game HUD -->
+<div id="hud" class="hidden">
+  <div id="hud-left">
+    <canvas id="minimap" width="196" height="196"></canvas>
+    <div id="objective-panel">
+      <div id="objective-title">Free roam</div>
+      <div id="objective-text">Explore Port Marisol. Visit Sol at Ferreira Motors for work.</div>
+      <div id="objective-dist"></div>
+    </div>
+  </div>
+  <div id="hud-right">
+    <div id="cash">$0</div>
+    <div id="stars" aria-label="wanted level"></div>
+    <div id="clock">12:00</div>
+  </div>
+  <div id="hud-bottom">
+    <div id="health-wrap"><div id="health-bar"></div><span id="health-label">RIO</span></div>
+    <div id="speedo" class="hidden">0 km/h</div>
+  </div>
+  <div id="interact" class="hidden"></div>
+  <div id="crosshair" class="hidden"></div>
+  <div id="banner" class="hidden"></div>
+  <div id="toast" class="hidden"></div>
+  <div id="dialogue" class="hidden">
+    <div id="dialogue-name">Sol Ferreira</div>
+    <div id="dialogue-text"></div>
+    <div id="dialogue-hint">click / space ▸</div>
+  </div>
+  <div id="damage-vignette"></div>
+</div>
+
+<!-- Title screen -->
+<div id="title-screen">
+  <div id="title-card">
+    <div id="title-kicker">welcome to</div>
+    <h1 id="title-logo">PORT MARISOL</h1>
+    <div id="title-tag">A sun-soaked city of easy money and bad decisions.</div>
+    <div id="title-buttons">
+      <button id="btn-continue" class="title-btn hidden">Continue</button>
+      <button id="btn-new" class="title-btn primary">New Game</button>
+      <button id="btn-how" class="title-btn">How to Play</button>
+    </div>
+    <div id="how-panel" class="hidden">
+      <p><b>Move</b> WASD · <b>Run</b> Shift · <b>Enter / steal car</b> E · <b>Shoot</b> F or mouse click ·
+      <b>Handbrake</b> Space · <b>Pause</b> P or Esc · <b>Music</b> M · <b>Camera</b> mouse drag</p>
+      <p>Work Sol Ferreira's jobs out of Ferreira Motors, build your bankroll, and mind the stars:
+      crime raises your wanted level, and Marisol PD always answers. Get wasted or busted and the
+      hospital and the courts take their cut. Progress saves automatically.</p>
+    </div>
+    <div id="title-foot">An original open-world crime game · keyboard &amp; mouse · sound on for sirens</div>
+  </div>
+</div>
+
+<!-- Pause screen -->
+<div id="pause-screen" class="hidden">
+  <div class="menu-card">
+    <h2>Paused</h2>
+    <p id="pause-stats"></p>
+    <button id="btn-resume" class="title-btn primary">Back to the streets</button>
+    <button id="btn-restart" class="title-btn">Restart story</button>
+  </div>
+</div>
+
+<!-- Wasted / busted screen -->
+<div id="wasted-screen" class="hidden">
+  <div id="wasted-word">WASTED</div>
+  <div id="wasted-detail"></div>
+</div>
+
+<script type="module" src="src/main.js"></script>
+</body>
+</html>
